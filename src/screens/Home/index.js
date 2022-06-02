@@ -16,7 +16,7 @@ export default function Home(props) {
                     New to Babylon Voice?
                 </Text>
                 <Text style={styles.linkText}
-                      onPress={() => navigation.navigate('Register')}>
+                      onPress={() => navigation.navigate('Onboarding')}>
                     Register
                 </Text>
             </View>

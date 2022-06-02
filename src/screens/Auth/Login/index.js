@@ -5,31 +5,22 @@ import {useMagicContext} from "../../../providers/MagicContext";
 
 import {socialGroups} from "../../../assets/data/socialData";
 import smsIcon from '../../../assets/images/sms.png';
-import userIcon from '../../../assets/images/user.png';
 import {useAuthContext} from "../../../providers/AuthContext";
 import * as Colors from "../../../styles/colors";
 
-export default function Register(props) {
+
+export default function Login(props) {
     const {magic} = useMagicContext();
-    const {loginWithEmail, token, isRegistered} = useAuthContext();
+    const {loginWithEmail, token} = useAuthContext();
     const [emailAddress, setEmailAddress] = useState("");
-    const [userName, setUserName] = useState("");
-    const [submitReady, setSubmitReady] = useState(false);
 
     const handleSubmit = (event) => {
-        if (!submitReady) {
+        if (!emailAddress) {
             return
         }
         event.preventDefault()
-        loginWithEmail(emailAddress, 1);
+        loginWithEmail(emailAddress, 0);
     }
-    useEffect(() => {
-        if (emailAddress && userName) {
-            setSubmitReady(true)
-        } else {
-            setSubmitReady(false)
-        }
-    }, [emailAddress, userName]);
 
     useEffect(() => {
         if (token) {
@@ -37,30 +28,9 @@ export default function Register(props) {
         }
     }, [token]);
 
-    useEffect(() => {
-        isRegistered && props.navigation.navigate("Login")
-    }, [isRegistered])
-
     return (
         <View style={styles.container}>
-            <Text style={styles.pageTitle}>Sign up</Text>
-            <View style={styles.socialGroup}>
-                {socialGroups.map((item, index) =>
-                    <TouchableHighlight
-                        key={index}
-                        onPress={() => {
-                        }}
-                        style={styles.socialIconBtn}
-                    >
-                        <Image source={item.src}/>
-                    </TouchableHighlight>
-                )}
-            </View>
-            <View style={styles.separateGroup}>
-                <View style={styles.separator}/>
-                <Text style={styles.separateText}>Or, register with email...</Text>
-                <View style={styles.separator}/>
-            </View>
+            <Text style={styles.pageTitle}>Login</Text>
             <View style={styles.inputGroup}>
                 <View style={styles.inputHeader}>
                     <Image source={smsIcon}/>
@@ -87,48 +57,46 @@ export default function Register(props) {
                     }
                 </View>
             </View>
-            <View style={styles.inputGroup}>
-                <View style={styles.inputHeader}>
-                    <Image source={userIcon}/>
-                    <Text style={styles.inputTitle}>User name</Text>
-                </View>
-                <View style={styles.linearContainer}>
-                    {userName ? <LinearGradient
-                        colors={['#e53dff', '#6171ff']}
-                        start={{x: 0.0, y: 1.0}}
-                        end={{x: 1.0, y: 1.0}}
-                        style={styles.linearGradientStyle}>
-                        <TextInput
-                            style={styles.input(userName)}
-                            onChangeText={(value) => setUserName(value)}
-                            value={userName}
-                            placeholder="Enter user name"
-                        />
-                    </LinearGradient> : <TextInput
-                        style={styles.input(userName)}
-                        onChangeText={(value) => setUserName(value)}
-                        value={userName}
-                        placeholder="Enter user name"
-                    />}
-                </View>
+            <View style={styles.forgotLink}>
+                <Text style={styles.linkText}
+                      onPress={() => props.navigation.navigate('ForgotPassword')}>
+                    Forgot Password?
+                </Text>
             </View>
-            <TouchableOpacity style={styles.submitBtn} enabled={submitReady} onPress={handleSubmit}>
+            <TouchableOpacity style={styles.submitBtn} enabled={emailAddress} onPress={handleSubmit}>
                 <LinearGradient
                     colors={['#F92BFA', '#0C0CF8']}
                     start={{x: 0.0, y: 1.0}}
                     end={{x: 1.0, y: 1.0}}
-                    style={styles.gradient(submitReady)}
+                    style={styles.gradient(emailAddress)}
                 >
-                    <Text style={styles.submitText}>SIGN UP</Text>
+                    <Text style={styles.submitText}>LOGIN</Text>
                 </LinearGradient>
             </TouchableOpacity>
+            <View style={styles.separateGroup}>
+                <View style={styles.separator}/>
+                <Text style={styles.separateText}>Or, login with...</Text>
+                <View style={styles.separator}/>
+            </View>
+            <View style={styles.socialGroup}>
+                {socialGroups.map((item, index) =>
+                    <TouchableHighlight
+                        key={index}
+                        onPress={() => {
+                        }}
+                        style={styles.socialIconBtn}
+                    >
+                        <Image source={item.src}/>
+                    </TouchableHighlight>
+                )}
+            </View>
             <View style={styles.registerLink}>
                 <Text style={styles.grayText}>
-                    Already registered?
+                    New to Babylon Voice AI?
                 </Text>
                 <Text style={styles.linkText}
-                      onPress={() => props.navigation.navigate('Login')}>
-                    Login
+                      onPress={() => props.navigation.navigate('Register')}>
+                    Register
                 </Text>
             </View>
             <magic.Relayer/>
@@ -201,14 +169,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 38
+        marginBottom: 35,
+        marginTop: 40
     },
     separateText: {
         color: Colors.Violet,
-        opacity: 0.4
+        opacity: 0.4,
+        marginLeft: 5,
+        marginRight: 5
     },
     inputGroup: {
-        marginBottom: 29
+        marginBottom: 24
     },
     inputHeader: {
         fontSize: 14,
@@ -261,4 +232,9 @@ const styles = StyleSheet.create({
         color: Colors.Heliotrop,
         marginLeft: 5
     },
+    forgotLink: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginBottom: 24,
+    }
 });
