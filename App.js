@@ -4,7 +4,7 @@ import MainStackNavigator from "./src/navigation/MainStackNavigator";
 import {MagicContextProvider} from "./src/providers/MagicContext";
 import {AuthContextProvider} from "./src/providers/AuthContext";
 import {Web3SolanaContextProvider} from "./src/providers/Web3SolanaContext";
-import {WalletContextProvider} from "./src/providers/walletContext";
+import {WalletContextProvider} from "./src/providers/walletModalContext";
 
 LogBox.ignoreLogs([
     "ViewPropTypes will be removed",

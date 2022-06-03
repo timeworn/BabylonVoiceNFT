@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {TextInput, StyleSheet, View, Text, Image, TouchableHighlight, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useMagicContext} from "../../../providers/MagicContext";
-import {useWalletContext} from "../../../providers/walletContext";
+import {useWalletModalContext} from "../../../providers/walletModalContext";
 import {useAuthContext} from "../../../providers/AuthContext";
 
 import * as Colors from "../../../styles/colors";
@@ -13,7 +13,7 @@ export default function Login(props) {
     const {magic} = useMagicContext();
     const {loginWithEmail, token} = useAuthContext();
     const [emailAddress, setEmailAddress] = useState("");
-    const {setIsWalletModalVisible} = useWalletContext();
+    const {setIsWalletModalVisible} = useWalletModalContext();
 
     const handleSubmit = (event) => {
         if (!emailAddress) {

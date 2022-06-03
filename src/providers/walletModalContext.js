@@ -1,19 +1,19 @@
 import React, {createContext, useContext, useState} from "react";
 
-const WalletContext = createContext();
+const WalletModalContext = createContext();
 
 export const WalletContextProvider = ({children}) => {
     const [isWalletModalVisible, setIsWalletModalVisible] = useState(false);
 
     return (
-        <WalletContext.Provider
+        <WalletModalContext.Provider
             value={{
                 isWalletModalVisible,
                 setIsWalletModalVisible
             }}>
             {children}
-        </WalletContext.Provider>
+        </WalletModalContext.Provider>
     );
 }
 
-export const useWalletContext = () => useContext(WalletContext)
+export const useWalletModalContext = () => useContext(WalletModalContext)

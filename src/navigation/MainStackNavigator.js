@@ -3,7 +3,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import {useAuthContext} from "../providers/AuthContext";
-import {useWalletContext} from "../providers/walletContext";
+import {useWalletModalContext} from "../providers/walletModalContext";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 import Register from "../screens/Auth/Register";
@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 export default function MainStackNavigator() {
     const {isLoginLoading} = useAuthContext();
-    const {isWalletModalVisible, setIsWalletModalVisible} = useWalletContext();
+    const {isWalletModalVisible, setIsWalletModalVisible} = useWalletModalContext();
     return (
         <NavigationContainer>
             <Stack.Navigator
