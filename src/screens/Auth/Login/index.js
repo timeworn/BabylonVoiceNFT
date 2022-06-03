@@ -2,17 +2,18 @@ import React, {useEffect, useState} from "react";
 import {TextInput, StyleSheet, View, Text, Image, TouchableHighlight, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useMagicContext} from "../../../providers/MagicContext";
+import {useWalletContext} from "../../../providers/walletContext";
+import {useAuthContext} from "../../../providers/AuthContext";
 
+import * as Colors from "../../../styles/colors";
 import {socialGroups} from "../../../assets/data/socialData";
 import smsIcon from '../../../assets/images/sms.png';
-import {useAuthContext} from "../../../providers/AuthContext";
-import * as Colors from "../../../styles/colors";
-
 
 export default function Login(props) {
     const {magic} = useMagicContext();
     const {loginWithEmail, token} = useAuthContext();
     const [emailAddress, setEmailAddress] = useState("");
+    const {setIsWalletModalVisible} = useWalletContext();
 
     const handleSubmit = (event) => {
         if (!emailAddress) {
@@ -20,6 +21,11 @@ export default function Login(props) {
         }
         event.preventDefault()
         loginWithEmail(emailAddress, 0);
+    }
+
+
+    const handleConnect = () => {
+        setIsWalletModalVisible(true);
     }
 
     useEffect(() => {
@@ -57,12 +63,6 @@ export default function Login(props) {
                     }
                 </View>
             </View>
-            <View style={styles.forgotLink}>
-                <Text style={styles.linkText}
-                      onPress={() => props.navigation.navigate('ForgotPassword')}>
-                    Forgot Password?
-                </Text>
-            </View>
             <TouchableOpacity style={styles.submitBtn} enabled={emailAddress} onPress={handleSubmit}>
                 <LinearGradient
                     colors={['#F92BFA', '#0C0CF8']}
@@ -71,6 +71,16 @@ export default function Login(props) {
                     style={styles.gradient(emailAddress)}
                 >
                     <Text style={styles.submitText}>LOGIN</Text>
+                </LinearGradient>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.walletBtn} onPress={handleConnect}>
+                <LinearGradient
+                    colors={['#F92BFA', '#0C0CF8']}
+                    start={{x: 0.0, y: 1.0}}
+                    end={{x: 1.0, y: 1.0}}
+                    style={styles.gradient(true)}
+                >
+                    <Text style={styles.submitText}>ConnectWallet</Text>
                 </LinearGradient>
             </TouchableOpacity>
             <View style={styles.separateGroup}>
@@ -117,6 +127,10 @@ const styles = StyleSheet.create({
     },
     submitBtn: {
         height: 48
+    },
+    walletBtn: {
+        height: 48,
+        marginTop: 24
     },
     input: (value) => {
         const borderColorVal = value ? 'transparent' : 'rgba(36, 11, 76, 0.4)';

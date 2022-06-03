@@ -3,18 +3,20 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import {useAuthContext} from "../providers/AuthContext";
+import {useWalletContext} from "../providers/walletContext";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 import Register from "../screens/Auth/Register";
 import RecordTab from "../screens/RecordTab";
 import Login from "../screens/Auth/Login";
 import Loader from "../components/common/loader";
-import ForgotPassword from "../screens/Auth/ForgotPassword";
+import WalletConnectionModal from "../components/common/walletConnection/walletConnectionModal";
 
 const Stack = createNativeStackNavigator();
 
 export default function MainStackNavigator() {
-    const {isLoginLoading} = useAuthContext()
+    const {isLoginLoading} = useAuthContext();
+    const {isWalletModalVisible, setIsWalletModalVisible} = useWalletContext();
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -43,12 +45,9 @@ export default function MainStackNavigator() {
                     name='VoiceRecord'
                     component={RecordTab}
                 />
-                <Stack.Screen
-                    name='ForgotPassword'
-                    component={ForgotPassword}
-                />
             </Stack.Navigator>
             <Loader isLoading={isLoginLoading}/>
+            <WalletConnectionModal isVisible={isWalletModalVisible} setVisible={setIsWalletModalVisible}/>
         </NavigationContainer>
     )
 }
