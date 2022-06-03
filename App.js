@@ -1,8 +1,9 @@
 import React from 'react';
+import {LogBox} from "react-native";
 import MainStackNavigator from "./src/navigation/MainStackNavigator";
 import {MagicContextProvider} from "./src/providers/MagicContext";
 import {AuthContextProvider} from "./src/providers/AuthContext";
-import {LogBox} from "react-native";
+import {Web3SolanaContextProvider} from "./src/providers/Web3SolanaContext";
 
 LogBox.ignoreLogs([
     "ViewPropTypes will be removed",
@@ -13,7 +14,9 @@ export default function App() {
     return (
         <MagicContextProvider>
             <AuthContextProvider>
-                <MainStackNavigator/>
+                <Web3SolanaContextProvider>
+                    <MainStackNavigator/>
+                </Web3SolanaContextProvider>
             </AuthContextProvider>
         </MagicContextProvider>
     );

@@ -2,10 +2,13 @@ import React from "react";
 import {Text, TouchableOpacity, StyleSheet, SafeAreaView, View} from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import {useAuthContext} from "../../providers/AuthContext";
+import {useWeb3SolanaContext} from "../../providers/Web3SolanaContext";
 
 export default function RecordTab(props) {
     const {userData} = useAuthContext();
+    const {balance} = useWeb3SolanaContext();
     const {logOut} = useAuthContext();
+
     const handleSubmit = () => {
         logOut();
         props.navigation.navigate("Login");
@@ -16,6 +19,10 @@ export default function RecordTab(props) {
                 <View>
                     <Text>Current User</Text>
                     <Text>{userData.email}</Text>
+                </View>
+                <View>
+                    <Text>Solana Balance</Text>
+                    <Text>{balance} SOL</Text>
                 </View>
                 <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
                     <LinearGradient
