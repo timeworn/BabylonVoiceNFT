@@ -17,7 +17,7 @@ export default function Onboarding(props) {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Swiper style={styles.wrapper} showsButtons={false}>
+                <Swiper height='100%' style={styles.wrapper} showsButtons={false}>
                     {onboardingData.map((item, index) => (
                         <OnboardingStep key={index} item={item} stage={index}/>
                     ))}
@@ -32,7 +32,7 @@ export default function Onboarding(props) {
                         <Text style={styles.submitText(false)}>LOGIN</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.submitBtn + styles.lastBtn} onPress={handleNavigateSignup}>
+                <TouchableOpacity style={styles.lastBtn} onPress={handleNavigateSignup}>
                     <LinearGradient
                         colors={['#F92BFA', '#0C0CF8']}
                         start={{x: 0.0, y: 1.0}}
@@ -71,7 +71,10 @@ export const styles = StyleSheet.create({
         margin: 37,
     },
     lastBtn: {
-      marginTop: 24
+      marginTop: 24,
+      height: 48
     },
-    wrapper: {},
+    wrapper: {
+        height: '60%'
+    },
 })

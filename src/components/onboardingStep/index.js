@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
-import * as colors from "../../styles/colors";
+import * as Colors from "../../styles/colors";
 
 export default function OnboardingStep(props) {
     return (
@@ -56,23 +56,23 @@ export const styles = StyleSheet.create({
         fontWeight: '600',
     },
     welcomeText: {
-        color: colors.Violet,
+        color: Colors.Violet,
         fontSize: 24,
     },
     mainTitle: {
         fontSize: 40,
-        color: colors.Heliotrop
+        color: Colors.Heliotrop
     },
     subTitle: {
-      color: colors.CornFlowerBlue
+      color: Colors.CornFlowerBlue
     },
     comment: {
         fontSize: 14,
         fontWeight: 400,
-        color: colors.Violet,
+        color: Colors.Violet,
         opacity: 0.4,
         marginTop: 24,
-        marginBottom: 12
+        marginBottom: 50
     },
     stepStage: {
         borderRadius: 12,
