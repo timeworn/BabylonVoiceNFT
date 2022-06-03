@@ -32,7 +32,7 @@ export default function Onboarding(props) {
                         <Text style={styles.submitText(false)}>LOGIN</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.submitBtn} onPress={handleNavigateSignup}>
+                <TouchableOpacity style={styles.submitBtn + styles.lastBtn} onPress={handleNavigateSignup}>
                     <LinearGradient
                         colors={['#F92BFA', '#0C0CF8']}
                         start={{x: 0.0, y: 1.0}}
@@ -69,6 +69,9 @@ export const styles = StyleSheet.create({
     },
     container: {
         margin: 37,
+    },
+    lastBtn: {
+      marginTop: 24
     },
     wrapper: {},
 })
