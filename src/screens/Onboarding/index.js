@@ -17,7 +17,7 @@ export default function Onboarding(props) {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Swiper height='100%' style={styles.wrapper} showsButtons={false}>
+                <Swiper height='100%' showsButtons={false}>
                     {onboardingData.map((item, index) => (
                         <OnboardingStep key={index} item={item} stage={index}/>
                     ))}
@@ -73,8 +73,5 @@ export const styles = StyleSheet.create({
     lastBtn: {
       marginTop: 24,
       height: 48
-    },
-    wrapper: {
-        height: '60%'
-    },
+    }
 })
