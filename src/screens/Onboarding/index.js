@@ -66,13 +66,9 @@ export const styles = StyleSheet.create({
     },
     submitBtn: {
         height: 48,
-        marginTop: 24
     },
     container: {
         margin: 37,
-        flex: 1,
-        justifyContent: 'space-between',
-        height: '100%'
     },
     wrapper: {},
 })
