@@ -4,7 +4,7 @@ import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import * as Colors from "../../../styles/colors";
 import MetamaskSVG from "../../../assets/images/svg/metamask.svg";
 import PhantomSVG from "../../../assets/images/svg/phantom.svg";
-import NearSVG from "../../../assets/images/svg/near.svg";
+import NearSVG from "../../../assets/images/svg/nearIcon.svg";
 
 export default function WalletConnectionWrapper(info) {
 
