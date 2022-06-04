@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
         color: Colors.Violet,
         opacity: 0.4,
         marginTop: 24,
-        marginBottom: 50
+        marginBottom: 70
     },
     stepStage: {
         borderRadius: 12,

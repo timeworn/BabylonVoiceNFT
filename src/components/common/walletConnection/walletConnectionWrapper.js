@@ -1,39 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 
 import * as Colors from "../../../styles/colors";
 import MetamaskSVG from "../../../assets/images/svg/metamask.svg";
-import GeminiSVG from "../../../assets/images/svg/gemini.svg";
-import CoinbaseSVG from "../../../assets/images/svg/coinbase.svg";
 import PhantomSVG from "../../../assets/images/svg/phantom.svg";
-import GlowSVG from "../../../assets/images/svg/glow.svg";
-import BeaconSVG from "../../../assets/images/svg/beacon.svg";
-import BloctoSVG from "../../../assets/images/svg/blocto.svg";
-import WaxSVG from "../../../assets/images/svg/wax.svg";
-import MagicSVG from "../../../assets/images/svg/magic.svg";
+import NearPNG from "../../../assets/images/near.png";
 
 export default function WalletConnectionWrapper(info) {
 
     const renderSwitch = (param) => {
         switch (param.id) {
             case 0:
-                return <MetamaskSVG width={28} height={28}/>;
+                return <MetamaskSVG width={30} height={30}/>;
             case 1:
-                return <GeminiSVG width={28} height={28}/>;
-            case 2:
-                return <CoinbaseSVG width={28} height={28}/>;
-            case 3:
                 return <PhantomSVG width={28} height={28}/>;
-            case 4:
-                return <GlowSVG width={28} height={28}/>;
-            case 5:
-                return <BeaconSVG width={28} height={28}/>;
-            case 6:
-                return <BloctoSVG width={28} height={28}/>;
-            case 7:
-                return <WaxSVG width={28} height={28}/>;
-            case 8:
-                return <MagicSVG width={28} height={28}/>;
+            case 2:
+                return <Image source={NearPNG} style={styles.svgIcon}/>;
             default:
                 return <MetamaskSVG width={28} height={28}/>;
         }
@@ -80,5 +62,10 @@ export const styles = StyleSheet.create({
     },
     walletName: {
         marginLeft: 10
+    },
+    svgIcon: {
+        width: 22,
+        height: 22,
+        marginLeft: 3
     }
 })
