@@ -26,15 +26,15 @@ export default function WalletModalContent() {
 
 export const styles = StyleSheet.create({
     container: {
-        height: '80%',
         justifyContent: 'center',
-        margin: 16,
+        margin: 16,    
         padding: 20,
+        paddingTop: 30,
         backgroundColor: 'white',
         borderRadius: 16,
     },
     list: {
-      marginTop: 20,
+      marginTop: 10,
     },
     title: {
         fontSize: 28,

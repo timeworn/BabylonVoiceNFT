@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import * as Colors from "../../../styles/colors";
 import MetamaskSVG from "../../../assets/images/svg/metamask.svg";
 import PhantomSVG from "../../../assets/images/svg/phantom.svg";
-import NearPNG from "../../../assets/images/near.png";
+import NearSVG from "../../../assets/images/svg/near.svg";
 
 export default function WalletConnectionWrapper(info) {
 
@@ -15,7 +15,7 @@ export default function WalletConnectionWrapper(info) {
             case 1:
                 return <PhantomSVG width={28} height={28}/>;
             case 2:
-                return <Image source={NearPNG} style={styles.svgIcon}/>;
+                return <NearSVG width={28} height={28}/>;
             default:
                 return <MetamaskSVG width={28} height={28}/>;
         }
@@ -66,6 +66,7 @@ export const styles = StyleSheet.create({
     svgIcon: {
         width: 22,
         height: 22,
-        marginLeft: 3
+        margin: 3,
+        padding: 3
     }
 })
