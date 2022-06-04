@@ -33,7 +33,7 @@ export default function Register(props) {
 
     useEffect(() => {
         if (token) {
-            props.navigation.navigate("VoiceRecord")
+            props.navigation.navigate("UserSetting")
         }
     }, [token]);
 

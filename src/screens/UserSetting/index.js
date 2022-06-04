@@ -2,11 +2,10 @@ import React from "react";
 import {Text, TouchableOpacity, StyleSheet, SafeAreaView, View} from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import {useAuthContext} from "../../providers/AuthContext";
-import {useWeb3SolanaContext} from "../../providers/Web3SolanaContext";
+import * as Colors from "../../styles/colors";
 
-export default function RecordTab(props) {
-    const {userData} = useAuthContext();
-    const {balance} = useWeb3SolanaContext();
+export default function UserSetting(props) {
+    const {userData, balance} = useAuthContext();
     const {logOut} = useAuthContext();
 
     const handleSubmit = () => {
@@ -16,13 +15,20 @@ export default function RecordTab(props) {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <View>
-                    <Text>Current User</Text>
-                    <Text>{userData.email}</Text>
+                <View style={styles.paragraph}>
+                    <Text style={styles.pageTitle}>User Setting</Text>
                 </View>
-                <View>
-                    <Text>Solana Balance</Text>
-                    <Text>{balance} SOL</Text>
+                <View style={styles.paragraph}>
+                    <Text style={styles.subTitle}>Current User</Text>
+                    <Text style={styles.paraValue}>{userData.email}</Text>
+                </View>
+                <View style={styles.paragraph}>
+                    <Text style={styles.subTitle}>Solana Address</Text>
+                    <Text style={styles.paraValue}>{userData.publicAddress}</Text>
+                </View>
+                <View style={styles.paragraph}>
+                    <Text style={styles.subTitle}>Solana Balance</Text>
+                    <Text style={styles.paraValue}>{balance} SOL</Text>
                 </View>
                 <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
                     <LinearGradient
@@ -42,7 +48,7 @@ export default function RecordTab(props) {
 
 const styles = StyleSheet.create({
     container: {
-      margin: 37
+        margin: 37
     },
     gradient: (submitReady) => {
         const opacityVal = submitReady ? 1 : 0.3;
@@ -57,4 +63,21 @@ const styles = StyleSheet.create({
     submitBtn: {
         height: 48
     },
+    pageTitle: {
+        fontSize: 28,
+        fontWeight: '600',
+        color: Colors.CodeGray,
+        alignSelf: 'center'
+    },
+    paragraph: {
+        marginBottom: 20
+    },
+    subTitle: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: Colors.Violet
+    },
+    paraValue: {
+        fontSize: 16
+    }
 })

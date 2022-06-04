@@ -30,7 +30,7 @@ export default function Login(props) {
 
     useEffect(() => {
         if (token) {
-            props.navigation.navigate("VoiceRecord")
+            props.navigation.navigate("UserSetting")
         }
     }, [token]);
 
@@ -109,7 +109,7 @@ export default function Login(props) {
                     Register
                 </Text>
             </View>
-            <magic.Relayer/>
+            {magic && <magic.Relayer/>}
         </View>
     )
 }

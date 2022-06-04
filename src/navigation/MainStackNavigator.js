@@ -7,8 +7,8 @@ import {useWalletModalContext} from "../providers/walletModalContext";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 import Register from "../screens/Auth/Register";
-import RecordTab from "../screens/RecordTab";
 import Login from "../screens/Auth/Login";
+import UserSetting from "../screens/UserSetting";
 import Loader from "../components/common/loader";
 import WalletConnectionModal from "../components/common/walletConnection/walletConnectionModal";
 
@@ -42,8 +42,8 @@ export default function MainStackNavigator() {
                     component={Register}
                 />
                 <Stack.Screen
-                    name='VoiceRecord'
-                    component={RecordTab}
+                    name='UserSetting'
+                    component={UserSetting}
                 />
             </Stack.Navigator>
             <Loader isLoading={isLoginLoading}/>
