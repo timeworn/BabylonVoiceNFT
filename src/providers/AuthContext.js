@@ -12,6 +12,7 @@ export const AuthContextProvider = ({children}) => {
     const [isRegisterd, setIsRegistered] = useState(false);
     const [isLoginLoading, setIsLoginLoading] = useState(false);
     const [balance, setBalance] = useState(0);
+    const [txHash, setTxHash] = useState("");
 
     const {magic} = useMagicContext();
 
@@ -46,6 +47,42 @@ export const AuthContextProvider = ({children}) => {
             }
         }
     }, [magic]);
+
+    const handleTransaction = async (destinationAddress, sendAmount) => {
+        const recipientPubKey = new web3.PublicKey(destinationAddress);
+        const payer = new web3.PublicKey(userData.publicAddress);
+        const hash = await connection.getRecentBlockhash();
+
+        let transactionMagic = new web3.Transaction({
+            feePayer: payer,
+            recentBlockhash: hash.blockhash
+        });
+
+        const transaction = web3.SystemProgram.transfer({
+            fromPubkey: payer,
+            toPubkey: recipientPubKey,
+            lamports: sendAmount
+        });
+
+        transactionMagic.add(...[transaction]);
+
+        const serializeConfig = {
+            requireAllSignatures: false,
+            verifySignatures: true
+        };
+
+        const signedTransaction = await magic.solana.signTransaction(
+            transactionMagic,
+            serializeConfig
+        );
+
+        console.log("Signed transaction", signedTransaction);
+
+        const tx = web3.Transaction.from(signedTransaction.rawTransaction);
+        const signature = await connection.sendRawTransaction(tx.serialize());
+        setTxHash(`https://explorer.solana.com/tx/${signature}?cluster=devnet`);
+    }
+
 
     const getBalance = async (pubKey) => {
         connection.getBalance(pubKey).then((bal) => setBalance(bal / 1000000000))
@@ -82,6 +119,7 @@ export const AuthContextProvider = ({children}) => {
                 token,
                 setToken,
                 balance,
+                handleTransaction,
                 isLoginLoading,
                 loginWithEmail,
                 logOut

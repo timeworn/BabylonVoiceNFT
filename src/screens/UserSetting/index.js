@@ -1,12 +1,14 @@
-import React from "react";
-import {Text, TouchableOpacity, StyleSheet, SafeAreaView, View} from 'react-native';
+import React, {useState} from "react";
+import {Text, TouchableOpacity, StyleSheet, SafeAreaView, View, TextInput} from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import {useAuthContext} from "../../providers/AuthContext";
 import * as Colors from "../../styles/colors";
 
 export default function UserSetting(props) {
     const {userData, balance} = useAuthContext();
-    const {logOut} = useAuthContext();
+    const {logOut, handleTransaction} = useAuthContext();
+    const [destinationAddress, setDestinationAddress] = useState("");
+    const [sendAmount, setSendAmount] = useState("");
 
     const handleSubmit = () => {
         logOut();
@@ -41,6 +43,45 @@ export default function UserSetting(props) {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
+            <View style={styles.container}>
+                <View style={styles.paragraph}>
+                    <Text style={styles.subTitle}>Send Transaction</Text>
+                    <LinearGradient
+                        colors={['#e53dff', '#6171ff']}
+                        start={{x: 0.0, y: 1.0}}
+                        end={{x: 1.0, y: 1.0}}
+                        style={styles.linearGradientStyle}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(value) => setDestinationAddress(value)}
+                            value={destinationAddress}
+                            placeholder="Destination Address"
+                        />
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#e53dff', '#6171ff']}
+                        start={{x: 0.0, y: 1.0}}
+                        end={{x: 1.0, y: 1.0}}
+                        style={styles.linearGradientStyle}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(value) => setSendAmount(value)}
+                            value={sendAmount}
+                            placeholder="Amount in LAMPORTS"
+                        />
+                    </LinearGradient>
+                    <TouchableOpacity style={styles.signTransactionBtn} onPress={handleTransaction(destinationAddress, sendAmount)}>
+                        <LinearGradient
+                            colors={['#F92BFA', '#0C0CF8']}
+                            start={{x: 0.0, y: 1.0}}
+                            end={{x: 1.0, y: 1.0}}
+                            style={styles.gradient(true)}
+                        >
+                            <Text style={styles.submitText}>Sign & Send Transaction</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </SafeAreaView>
 
     )
@@ -63,6 +104,10 @@ const styles = StyleSheet.create({
     submitBtn: {
         height: 48
     },
+    signTransactionBtn: {
+        height: 48,
+        marginTop: 24
+    },
     pageTitle: {
         fontSize: 28,
         fontWeight: '600',
@@ -79,5 +124,22 @@ const styles = StyleSheet.create({
     },
     paraValue: {
         fontSize: 16
+    },
+    linearGradientStyle: {
+        height: 50,
+        borderColor: 'transparent',
+        width: '100%',
+        opacity: 0.4,
+        borderRadius: 16,
+        marginVertical: 5
+    },
+    input: {
+        height: 48,
+        fontSize: 16,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 16,
+        borderColor: Colors.LightViolet,
+        width: '100%',
     }
 })
